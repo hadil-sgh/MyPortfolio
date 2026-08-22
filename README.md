@@ -1,35 +1,34 @@
-# Hadil Sghaier — Portfolio
+# Hadil Sghaier - Portfolio
 
-An Angular 18 (standalone components) single-page portfolio built from your résumé content,
-styled in the dark, monospace-labeled, terminal aesthetic from your inspiration screenshots —
-with one signature twist: a "career pipeline" section that renders your education and
-experience as a CI/CD-style build log, since that's genuinely how a DevOps engineer's
-timeline reads.
+Welcome to Hadil Sghaier's professional portfolio.
 
-## Run it locally
+Hadil is a full-stack AI engineer passionate about turning research and ideas into
+useful, reliable products. Her work focuses on artificial intelligence, explainable AI,
+multimodal systems, and applications that make complex technology easier to use.
 
-```bash
-npm install
-npm start
-```
+## What you will find
 
-Then open http://localhost:4200.
+- A brief introduction and professional focus
+- Education and experience
+- Selected projects across AI, web, mobile, and desktop applications
+- Skills, certifications, and languages
+- Contact information
 
-## Structure
+## Featured work
 
-- `src/app/nav` — sticky top nav
-- `src/app/hero` — name, tagline, and a small "pipeline log" motif
-- `src/app/about` — bio + quick facts
-- `src/app/timeline` — the career pipeline (education + experience merged, reverse-chronological)
-- `src/app/projects` — project cards with tag pills
-- `src/app/skills` — categorized skill chips
-- `src/app/certifications` — certifications + languages
-- `src/app/footer` — contact line
+The portfolio highlights projects such as:
 
-## Things to swap in before publishing
+- An intelligent assistant for searching and understanding large document collections
+- A platform for managing employees, attendance, payroll, and leave
+- A food shopping mobile application
+- A farm management system for production and stock tracking
+- An election management application
 
-- `nav`/`hero`: replace the placeholder `href="#"` LinkedIn/GitHub links with your real profile URLs.
-- Per-project `GitHub` links aren't wired up yet — add a `url` field to each project in
-  `projects.component.ts` and a link in the template if you want them clickable.
-- Colors, fonts, and the pipeline motif all live in CSS custom properties at the top of
-  `src/styles.scss` if you want to retune the palette.
+Hadil is also interested in explainable AI for medical imaging and the development of
+multimodal systems that can work with both medical images and clinical information.
+
+## Contact
+
+Email: hadil.sghair@esprit.tn
+
+Location: Ben Arous, Tunisia
