@@ -1,0 +1,16 @@
+<section class="section" id="skills">
+  <p class="eyebrow">skills</p>
+
+  <div class="groups">
+    @for (g of groups; track g.label) {
+      <div class="group">
+        <span class="label">{{ g.label }}</span>
+        <div class="chips">
+          @for (item of g.items; track item) {
+            <span class="chip">{{ item }}</span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

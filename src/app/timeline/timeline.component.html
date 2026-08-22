@@ -1,0 +1,33 @@
+<section class="section" id="pipeline">
+  <p class="eyebrow">career pipeline</p>
+
+  <div class="rail">
+    @for (stage of stages; track stage.org + stage.dates) {
+      <article class="stage" [class.progress]="stage.status === 'progress'">
+        <div class="node-col">
+          <span class="node" [class]="stage.kind"></span>
+          <span class="wire"></span>
+        </div>
+        <div class="card">
+          <div class="card-top">
+            <span class="badge" [class.progress]="stage.status === 'progress'">
+              {{ stage.status === 'progress' ? 'in progress' : 'passed' }}
+            </span>
+            <span class="kind-tag">{{ stage.kind }}</span>
+            <span class="dates">{{ stage.dates }}</span>
+          </div>
+          <h3 class="org">{{ stage.org }}</h3>
+          <p class="role" [innerHTML]="stage.role"></p>
+          <p class="place">{{ stage.place }}</p>
+          @if (stage.bullets.length) {
+            <ul>
+              @for (b of stage.bullets; track b) {
+                <li [innerHTML]="b"></li>
+              }
+            </ul>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>

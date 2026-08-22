@@ -1,0 +1,18 @@
+<section class="section" id="projects">
+  <p class="eyebrow">projects</p>
+
+  <div class="grid">
+    @for (p of projects; track p.title) {
+      <article class="card">
+        <div class="tags">
+          @for (t of p.tags; track t) {
+            <span class="tag">{{ t }}</span>
+            @if (!$last) { <span class="dot">·</span> }
+          }
+        </div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.description }}</p>
+      </article>
+    }
+  </div>
+</section>

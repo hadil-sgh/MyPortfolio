@@ -1,0 +1,46 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 26px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: var(--amber);
+    transform: translateY(-2px);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.dot {
+  color: var(--line);
+  font-family: var(--font-mono);
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+}

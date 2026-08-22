@@ -1,0 +1,8 @@
+<header class="nav">
+  <a href="#top" class="mark">HS<span>.</span></a>
+  <nav class="links">
+    @for (link of links; track link.href) {
+      <a [href]="link.href">{{ link.label }}</a>
+    }
+  </nav>
+</header>

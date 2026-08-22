@@ -1,0 +1,22 @@
+<section class="section" id="contact">
+  <p class="eyebrow">certifications</p>
+
+  <ul class="certs">
+    @for (c of certs; track c.name) {
+      <li>
+        <span class="name">{{ c.name }}</span>
+        <span class="issuer">{{ c.issuer }}{{ c.date ? ' · ' + c.date : '' }}</span>
+      </li>
+    }
+  </ul>
+
+  <p class="eyebrow languages-eyebrow">languages</p>
+  <div class="languages">
+    @for (l of languages; track l.name) {
+      <div class="lang">
+        <span class="lang-name">{{ l.name }}</span>
+        <span class="lang-level">{{ l.level }}</span>
+      </div>
+    }
+  </div>
+</section>
