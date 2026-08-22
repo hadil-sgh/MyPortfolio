@@ -84,4 +84,7 @@ export class TimelineComponent {
       bullets: [],
     },
   ];
+
+  readonly experienceStages = this.stages.filter((stage) => stage.kind === 'experience');
+  readonly educationStages = this.stages.filter((stage) => stage.kind !== 'experience');
 }

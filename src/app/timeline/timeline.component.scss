@@ -2,10 +2,30 @@
   position: relative;
 }
 
+.timeline-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.timeline-group h2 {
+  margin: 0 0 22px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
 .stage {
   display: grid;
   grid-template-columns: 28px 1fr;
   gap: 20px;
+
+  @for $stage from 1 through 6 {
+    &:nth-child(#{$stage}) .card {
+      animation-delay: #{($stage - 1) * 100}ms;
+    }
+  }
 }
 
 .node-col {
@@ -37,7 +57,31 @@
 .stage:last-child .wire { display: none; }
 
 .card {
-  padding-bottom: 40px;
+  min-width: 0;
+  margin-bottom: 24px;
+  padding: 24px 28px 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  animation: pipeline-card-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: var(--teal);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pipeline-card-enter {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .card-top {
@@ -108,5 +152,8 @@ li {
 }
 
 @media (max-width: 560px) {
+  .timeline-groups { grid-template-columns: 1fr; gap: 24px; }
+  .stage { gap: 14px; }
+  .card { padding: 20px; }
   .dates { margin-left: 0; width: 100%; order: 3; }
 }

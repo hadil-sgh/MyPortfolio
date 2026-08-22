@@ -1,7 +1,7 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.5vw, 32px);
 }
 
 .card {
@@ -9,11 +9,28 @@
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 26px;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  animation: card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  @for $card from 1 through 6 {
+    &:nth-child(#{$card}) { animation-delay: #{($card - 1) * 80}ms; }
+  }
 
   &:hover {
     border-color: var(--amber);
-    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 

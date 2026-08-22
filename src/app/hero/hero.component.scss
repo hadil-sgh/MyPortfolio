@@ -1,10 +1,15 @@
 .hero {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 88px var(--gutter) 64px;
+  padding: clamp(72px, 8vw, 120px) var(--gutter) clamp(64px, 7vw, 104px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  column-gap: clamp(40px, 8vw, 140px);
+  align-items: end;
 }
 
 .eyebrow-line {
+  grid-column: 1 / -1;
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -14,6 +19,7 @@
 }
 
 .name {
+  grid-column: 1;
   font-size: clamp(52px, 10vw, 96px);
   line-height: 0.98;
   letter-spacing: -0.01em;
@@ -28,7 +34,9 @@
 }
 
 .lede {
-  margin-top: 32px;
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0 0 8px;
   max-width: 560px;
   font-size: 18px;
   line-height: 1.7;
@@ -36,6 +44,7 @@
 }
 
 .log {
+  grid-column: 1;
   margin-top: 44px;
   padding: 18px 20px;
   border: 1px solid var(--line);
@@ -73,10 +82,21 @@
 }
 
 .cta-row {
+  grid-column: 2;
+  grid-row: 3;
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    display: block;
+  }
+
+  .lede { margin-top: 32px; }
+  .cta-row { margin-top: 32px; }
 }
 
 .cta {
