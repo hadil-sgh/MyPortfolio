@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+
+interface StageMedia {
+  type: 'image' | 'video';
+  src: string;
+  alt: string;
+}
 
 interface Stage {
   status: 'progress' | 'passed';
@@ -8,6 +14,12 @@ interface Stage {
   place: string;
   dates: string;
   bullets: string[];
+  rolePrefix?: string;
+  roleSuffix?: string;
+  thesisTitle?: string;
+  thesisDescription?: string;
+  note?: string;
+  media?: StageMedia;
 }
 
 @Component({
@@ -22,13 +34,16 @@ export class TimelineComponent {
       status: 'progress',
       kind: 'research',
       org: 'National Engineering School of Gabès',
-      role: 'Ph.D. in Computer &amp; Communications Engineering (Remote)',
+      role: 'Computer &amp; Communications Engineering (Remote)',
+      rolePrefix: 'PhD',
+      roleSuffix: 'in',
       place: 'Gabès, Tunisia',
       dates: 'Sep 2026 — Present',
-      bullets: [
-        'Thesis: "XAI-Enhanced Multimodal System for Medical Imaging Diagnostics" — explainable AI reasoning over CT/MRI scans alongside clinical text.',
-      ],
+      bullets: [],
+      thesisTitle: 'XAI-Enhanced Multimodal System for Medical Imaging Diagnostics',
+      thesisDescription: 'Explainable AI reasoning over CT/MRI scans alongside clinical text.',
     },
+    
     {
       status: 'passed',
       kind: 'experience',
@@ -42,6 +57,11 @@ export class TimelineComponent {
         'Containerized services with Docker and built a CI/CD pipeline for reproducible, scalable deployment.',
         'Built the full-stack platform (Spring Boot + Angular) with role-based security and agent/manager dashboards.',
       ],
+      media: {
+        type: 'image',
+        src: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85',
+        alt: 'Team collaborating around a table',
+      },
     },
     {
       status: 'passed',
@@ -53,6 +73,11 @@ export class TimelineComponent {
       bullets: [
         'Built a web app for managing interns\u2019 data and progress using Express.js, Angular, and MySQL.',
       ],
+      media: {
+        type: 'image',
+        src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=85',
+        alt: 'Modern software engineering workspace',
+      },
     },
     {
       status: 'passed',
@@ -62,6 +87,7 @@ export class TimelineComponent {
       place: 'Ariana, Tunisia',
       dates: 'Sep 2023 — Sep 2025',
       bullets: [],
+      note: 'Graduated with excellence: 16.4/20 annual average and 18.5/20 for the final defense.',
     },
     {
       status: 'passed',
@@ -73,6 +99,11 @@ export class TimelineComponent {
       bullets: [
         'Built an eCommerce platform with Spring Boot, Angular, and MySQL, contributing to full delivery of project milestones.',
       ],
+      media: {
+        type: 'image',
+        src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=85',
+        alt: 'Planning and reviewing a software project',
+      },
     },
     {
       status: 'passed',
@@ -87,4 +118,20 @@ export class TimelineComponent {
 
   readonly experienceStages = this.stages.filter((stage) => stage.kind === 'experience');
   readonly educationStages = this.stages.filter((stage) => stage.kind !== 'experience');
+  selectedStage: Stage | null = null;
+
+  openMedia(stage: Stage): void {
+    if (stage.media) {
+      this.selectedStage = stage;
+    }
+  }
+
+  closeMedia(): void {
+    this.selectedStage = null;
+  }
+
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    this.closeMedia();
+  }
 }

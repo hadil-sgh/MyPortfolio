@@ -11,7 +11,7 @@
               <span class="node" [class]="stage.kind"></span>
               <span class="wire"></span>
             </div>
-            <div class="card">
+            <div class="card" [class.media-card]="stage.media" (click)="openMedia(stage)" (keydown.enter)="openMedia(stage)" (keydown.space)="openMedia(stage); $event.preventDefault()" [attr.role]="stage.media ? 'button' : null" [attr.tabindex]="stage.media ? 0 : null">
               <div class="card-top">
                 <span class="badge" [class.progress]="stage.status === 'progress'">
                   {{ stage.status === 'progress' ? 'in progress' : 'passed' }}
@@ -20,8 +20,19 @@
                 <span class="dates">{{ stage.dates }}</span>
               </div>
               <h3 class="org">{{ stage.org }}</h3>
-              <p class="role" [innerHTML]="stage.role"></p>
+              <p class="role">
+                @if (stage.rolePrefix) {
+                  <strong class="role-highlight">{{ stage.rolePrefix }}</strong> {{ stage.roleSuffix }}
+                }
+                <span [innerHTML]="stage.role"></span>
+              </p>
               <p class="place">{{ stage.place }}</p>
+              @if (stage.thesisTitle) {
+                <p class="thesis"><strong>Thesis:</strong> <strong class="role-highlight">&quot;{{ stage.thesisTitle }}&quot;</strong> &mdash; {{ stage.thesisDescription }}</p>
+              }
+              @if (stage.note) {
+                <p class="education-note">{{ stage.note }}</p>
+              }
               @if (stage.bullets.length) {
                 <ul>
                   @for (b of stage.bullets; track b) {
@@ -44,7 +55,7 @@
               <span class="node" [class]="stage.kind"></span>
               <span class="wire"></span>
             </div>
-            <div class="card">
+            <div class="card" [class.media-card]="stage.media" (click)="openMedia(stage)" (keydown.enter)="openMedia(stage)" (keydown.space)="openMedia(stage); $event.preventDefault()" [attr.role]="stage.media ? 'button' : null" [attr.tabindex]="stage.media ? 0 : null">
               <div class="card-top">
                 <span class="badge" [class.progress]="stage.status === 'progress'">
                   {{ stage.status === 'progress' ? 'in progress' : 'passed' }}
@@ -53,8 +64,19 @@
                 <span class="dates">{{ stage.dates }}</span>
               </div>
               <h3 class="org">{{ stage.org }}</h3>
-              <p class="role" [innerHTML]="stage.role"></p>
+              <p class="role">
+                @if (stage.rolePrefix) {
+                  <strong class="role-highlight">{{ stage.rolePrefix }}</strong> {{ stage.roleSuffix }}
+                }
+                <span [innerHTML]="stage.role"></span>
+              </p>
               <p class="place">{{ stage.place }}</p>
+              @if (stage.thesisTitle) {
+                <p class="thesis"><strong>Thesis:</strong> <strong class="role-highlight">&quot;{{ stage.thesisTitle }}&quot;</strong> &mdash; {{ stage.thesisDescription }}</p>
+              }
+              @if (stage.note) {
+                <p class="education-note">{{ stage.note }}</p>
+              }
               @if (stage.bullets.length) {
                 <ul>
                   @for (b of stage.bullets; track b) {
@@ -69,3 +91,17 @@
     </div>
   </div>
 </section>
+
+@if (selectedStage?.media; as media) {
+  <div class="media-modal" role="presentation" (click)="closeMedia()">
+    <div class="media-dialog" role="dialog" aria-modal="true" [attr.aria-label]="selectedStage?.org" (click)="$event.stopPropagation()">
+      <button class="close-button" type="button" aria-label="Close media" (click)="closeMedia()">&times;</button>
+      <p class="media-label">{{ selectedStage?.org }}</p>
+      @if (media.type === 'image') {
+        <img [src]="media.src" [alt]="media.alt" />
+      } @else {
+        <video [src]="media.src" controls autoplay></video>
+      }
+    </div>
+  </div>
+}

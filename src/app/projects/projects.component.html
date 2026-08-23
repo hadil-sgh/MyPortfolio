@@ -3,7 +3,21 @@
 
   <div class="grid">
     @for (p of projects; track p.title) {
-      <article class="card">
+      <article
+        class="card"
+        [class.is-rotated]="activeVisual === p.title"
+        (click)="rotateVisual(p.title)"
+        (keydown.enter)="rotateVisual(p.title)"
+        (keydown.space)="$event.preventDefault(); rotateVisual(p.title)"
+        tabindex="0"
+        role="button"
+        [attr.aria-pressed]="activeVisual === p.title"
+        [attr.aria-label]="'Rotate ' + p.title + ' project visual'"
+      >
+        <div class="visual" [class]="'visual visual--' + p.visual" aria-hidden="true">
+          <span class="visual-label">{{ p.visual }}</span>
+          <span class="visual-mark"></span>
+        </div>
         <div class="tags">
           @for (t of p.tags; track t) {
             <span class="tag">{{ t }}</span>
