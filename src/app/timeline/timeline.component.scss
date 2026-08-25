@@ -240,3 +240,187 @@ li {
   .card { padding: 20px; }
   .dates { margin-left: 0; width: 100%; order: 3; }
 }
+.rail {
+  position: relative;
+}
+
+.timeline-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.timeline-group h2 {
+  margin: 0 0 22px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 20px;
+
+  @for $stage from 1 through 6 {
+    &:nth-child(#{$stage}) .card {
+      animation-delay: #{($stage - 1) * 100}ms;
+    }
+  }
+}
+
+.node-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex: none;
+  background: var(--ink-dim);
+
+  &.research { background: var(--amber); box-shadow: 0 0 0 4px rgba(212, 161, 92, 0.15); }
+  &.experience { background: var(--blue); box-shadow: 0 0 0 4px rgba(124, 147, 201, 0.15); }
+  &.education { background: var(--teal); box-shadow: 0 0 0 4px rgba(95, 184, 172, 0.15); }
+}
+
+.wire {
+  flex: 1;
+  width: 1px;
+  background: var(--line);
+  margin: 4px 0;
+}
+
+.stage:last-child .wire { display: none; }
+
+.card {
+  min-width: 0;
+  margin-bottom: 24px;
+  padding: 24px 28px 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  animation: pipeline-card-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    border-color: var(--teal);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+}
+
+.media-card {
+  cursor: pointer;
+}
+
+.media-card:focus-visible {
+  border-color: var(--amber);
+}
+
+.role-highlight {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.thesis,
+.education-note {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  margin-top: 14px;
+}
+
+.education-note {
+  color: var(--ink);
+}
+
+@keyframes pipeline-card-enter {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 8px;
+
+  &.progress {
+    color: var(--amber);
+    border-color: var(--amber);
+  }
+}
+
+.kind-tag {
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dates {
+  color: var(--ink-dim);
+  margin-left: auto;
+}
+
+.org {
+  font-size: 21px;
+  margin-bottom: 4px;
+}
+
+.role {
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.place {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin-bottom: 14px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+li {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 560px) {
+  .timeline-groups { grid-template-columns: 1fr; gap: 24px; }
+  .stage { gap: 14px; }
+  .card { padding: 20px; }
+  .dates { margin-left: 0; width: 100%; order: 3; }
+}

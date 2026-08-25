@@ -11,7 +11,15 @@
               <span class="node" [class]="stage.kind"></span>
               <span class="wire"></span>
             </div>
-            <div class="card" [class.media-card]="stage.media" (click)="openMedia(stage)" (keydown.enter)="openMedia(stage)" (keydown.space)="openMedia(stage); $event.preventDefault()" [attr.role]="stage.media ? 'button' : null" [attr.tabindex]="stage.media ? 0 : null">
+            <div
+              class="card"
+              [class.media-card]="stage.experience"
+              (click)="openExperience(stage)"
+              (keydown.enter)="openExperience(stage)"
+              (keydown.space)="openExperience(stage); $event.preventDefault()"
+              [attr.role]="stage.experience ? 'button' : null"
+              [attr.tabindex]="stage.experience ? 0 : null"
+            >
               <div class="card-top">
                 <span class="badge" [class.progress]="stage.status === 'progress'">
                   {{ stage.status === 'progress' ? 'in progress' : 'passed' }}
@@ -55,7 +63,15 @@
               <span class="node" [class]="stage.kind"></span>
               <span class="wire"></span>
             </div>
-            <div class="card" [class.media-card]="stage.media" (click)="openMedia(stage)" (keydown.enter)="openMedia(stage)" (keydown.space)="openMedia(stage); $event.preventDefault()" [attr.role]="stage.media ? 'button' : null" [attr.tabindex]="stage.media ? 0 : null">
+            <div
+              class="card"
+              [class.media-card]="stage.experience"
+              (click)="openExperience(stage)"
+              (keydown.enter)="openExperience(stage)"
+              (keydown.space)="openExperience(stage); $event.preventDefault()"
+              [attr.role]="stage.experience ? 'button' : null"
+              [attr.tabindex]="stage.experience ? 0 : null"
+            >
               <div class="card-top">
                 <span class="badge" [class.progress]="stage.status === 'progress'">
                   {{ stage.status === 'progress' ? 'in progress' : 'passed' }}
@@ -92,16 +108,7 @@
   </div>
 </section>
 
-@if (selectedStage?.media; as media) {
-  <div class="media-modal" role="presentation" (click)="closeMedia()">
-    <div class="media-dialog" role="dialog" aria-modal="true" [attr.aria-label]="selectedStage?.org" (click)="$event.stopPropagation()">
-      <button class="close-button" type="button" aria-label="Close media" (click)="closeMedia()">&times;</button>
-      <p class="media-label">{{ selectedStage?.org }}</p>
-      @if (media.type === 'image') {
-        <img [src]="media.src" [alt]="media.alt" />
-      } @else {
-        <video [src]="media.src" controls autoplay></video>
-      }
-    </div>
-  </div>
-}
+<app-experience-modal
+  [experience]="selectedExperience"
+  (closed)="closeExperience()"
+/>

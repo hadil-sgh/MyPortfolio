@@ -1,10 +1,6 @@
-import { Component, HostListener } from "@angular/core";
-
-interface StageMedia {
-  type: "image" | "video";
-  src: string;
-  alt: string;
-}
+import { Component } from "@angular/core";
+import { Project } from "../projects/project.model";
+import { ExperienceModalComponent, ExperienceMedia } from "../experience-modal/experience-modal.component";
 
 interface Stage {
   status: "progress" | "passed";
@@ -19,12 +15,19 @@ interface Stage {
   thesisTitle?: string;
   thesisDescription?: string;
   note?: string;
-  media?: StageMedia;
+  experience?: {
+    imageFolder: string;
+    imageFiles: string[];
+    description: string;
+    tags: string[];
+    highlights?: { title: string; description: string }[];
+  };
 }
 
 @Component({
   selector: "app-timeline",
   standalone: true,
+  imports: [ExperienceModalComponent],
   templateUrl: "./timeline.component.html",
   styleUrl: "./timeline.component.scss",
 })
@@ -45,7 +48,6 @@ export class TimelineComponent {
       thesisDescription:
         "Explainable AI reasoning over CT/MRI scans alongside clinical text.",
     },
-
     {
       status: "passed",
       kind: "experience",
@@ -59,10 +61,67 @@ export class TimelineComponent {
         "Containerized services with Docker and built a CI/CD pipeline for reproducible, scalable deployment.",
         "Built the full-stack platform (Spring Boot + Angular) with role-based security and agent/manager dashboards.",
       ],
-      media: {
-        type: "image",
-        src: "/images/Ooredoo%20Stage/base.png",
-        alt: "Ooredoo knowledge base interface",
+      experience: {
+        imageFolder: "Experience/Ooredoo Tunisia",
+        imageFiles: [
+          "login.png", "register.png", "mailreg.png", "mailval.png",
+          "validate acc.png", "authpass.png", "authedit.png", "authdetails edit.png",
+          "base.png",
+          "dahagent.png", "agentdash2.png", "agent per 2.png", "perfagent1.png",
+          "dashmanager.png", "dashmanager1.png", "dashmanager12.png", "dashmanager2.png",
+          "dashmanagerper.png", "performancemanger1.png",
+          "vieww perfomrmance admin1.png", "vieww perfomrmance admin2_4.png",
+          "liveanalys.png", "manula dial.png",
+          "call managment.png", "call ditails.png", "call history.png", "callcard.png", "fitercall.png",
+          "POST CALL.png", "postcallmail.png", "complaint.png", "view complaints.png",
+          "notes.png", "notedetails.png", "notification updated.png",
+          "assing team.png", "create team view.png", "view team.png", "viewteam.png",
+          "assign agents.png", "addagent.png", "delagent1.png", "delagent2.png",
+          "markhfulagent.png", "userlist.png",
+          "assign tip.png", "assign tips.png", "filter tip.png", "fiter tips.png", "viewtip.png",
+          "create know.png", "cretae know.png", "editknow.png", "editknow_2.png", "editknow_3.png",
+          "viewknow.png", "viewknow_2.png", "filter know.png", "filter know_2.png",
+          "filter knowlage.png", "fiterknowage.png", "dekete know.png",
+          "excel.png", "deletewarningnote.png",
+        ],
+        description:
+          "End-of-studies platform for Ooredoo Tunisia: a real-time contact-center intelligence suite. " +
+          "Live transcription and speaker diarization (Faster Whisper + SpeechBrain) feed real-time " +
+          "sentiment analysis (VADER + harshit345), while LLaMA-based prompting scores agent performance " +
+          "and detects complaints for coaching insights. A churn-prediction API flags at-risk customers for " +
+          "proactive retention. Full-stack delivery on Spring Boot + Angular with role-based dashboards, " +
+          "containerized with Docker and shipped through a CI/CD pipeline. The audio pipeline runs at " +
+          "~0.8 accuracy with ~273ms latency.",
+        tags: [
+          "Spring Boot", "Angular", "Faster Whisper", "SpeechBrain",
+          "VADER", "LLaMA", "Docker", "CI/CD", "Churn Prediction",
+        ],
+          highlights: [
+    {
+      title: "Real-Time Speech-to-Text and Sentiment Analysis",
+      description:
+        "Live transcription of customer-agent interactions using Faster Whisper, speaker diarization " +
+        "with SpeechBrain, and real-time sentiment analysis with VADER and harshit345 models.",
+    },
+    {
+      title: "Agent Performance Tracking and Complaint Detection",
+      description:
+        "LLaMA-based language models through prompt APIs evaluate conversation quality, detect " +
+        "complaints, and generate actionable coaching insights.",
+    },
+    {
+      title: "Churn Prediction",
+      description:
+        "A machine learning-powered API identifies customers at risk of leaving, enabling proactive " +
+        "retention strategies.",
+    },
+    {
+      title: "Platform Development",
+      description:
+        "Built with a Spring Boot backend and Angular frontend, ensuring scalability, maintainability, " +
+        "and seamless integration of all modules within a single, user-friendly interface.",
+    },
+  ],
       },
     },
     {
@@ -75,10 +134,11 @@ export class TimelineComponent {
       bullets: [
         "Built a web app for managing interns\u2019 data and progress using Express.js, Angular, and MySQL.",
       ],
-      media: {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=85",
-        alt: "Modern software engineering workspace",
+      experience: {
+        imageFolder: "Experience/Trends Company",
+        imageFiles: [],
+        description: "Web app for managing interns' data and progress.",
+        tags: ["Express.js", "Angular", "MySQL"],
       },
     },
     {
@@ -101,10 +161,11 @@ export class TimelineComponent {
       bullets: [
         "Built an eCommerce platform with Spring Boot, Angular, and MySQL, contributing to full delivery of project milestones.",
       ],
-      media: {
-        type: "image",
-        src: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=85",
-        alt: "Planning and reviewing a software project",
+      experience: {
+        imageFolder: "Experience/ITGust",
+        imageFiles: [],
+        description: "eCommerce platform delivery.",
+        tags: ["Spring Boot", "Angular", "MySQL"],
       },
     },
     {
@@ -124,20 +185,28 @@ export class TimelineComponent {
   readonly educationStages = this.stages.filter(
     (stage) => stage.kind !== "experience",
   );
-  selectedStage: Stage | null = null;
 
-  openMedia(stage: Stage): void {
-    if (stage.media) {
-      this.selectedStage = stage;
-    }
+  selectedExperience: ExperienceMedia | null = null;
+
+  private toAssetPath(folder: string, fileName: string): string {
+    return `/images/${encodeURIComponent(folder)}/${encodeURIComponent(fileName)}`;
   }
 
-  closeMedia(): void {
-    this.selectedStage = null;
+  openExperience(stage: Stage): void {
+    if (!stage.experience) return;
+    this.selectedExperience = {
+      slug: stage.org.toLowerCase().replace(/\s+/g, "-"),
+      title: `${stage.org} — ${stage.role}`,
+      description: stage.experience.description,
+      tags: stage.experience.tags,
+          highlights: stage.experience.highlights, // NEW
+      images: stage.experience.imageFiles.map((file) =>
+        this.toAssetPath(stage.experience!.imageFolder, file),
+      ),
+    };
   }
 
-  @HostListener("document:keydown.escape")
-  handleEscape(): void {
-    this.closeMedia();
+  closeExperience(): void {
+    this.selectedExperience = null;
   }
 }

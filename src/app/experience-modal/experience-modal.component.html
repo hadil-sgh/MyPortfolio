@@ -1,0 +1,76 @@
+@if (experience) {
+  <div class="backdrop" (click)="close()">
+    <section
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-labelledby]="'experience-title-' + experience.slug"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="close-button"
+        type="button"
+        aria-label="Close experience details"
+        (click)="close()"
+      >
+        &times;
+      </button>
+
+      <div class="gallery">
+        @if (experience.images.length) {
+          <img
+            [src]="experience.images[activeImage]"
+            [alt]="experience.title + ' screenshot ' + (activeImage + 1)"
+          />
+        } @else {
+          <div class="gallery-empty">Confidential.</div>
+        }
+
+        @if (experience.images.length > 1) {
+          <button
+            class="gallery-button gallery-button--previous"
+            type="button"
+            aria-label="Previous image"
+            (click)="showPrevious()"
+          >
+            &#8592;
+          </button>
+          <button
+            class="gallery-button gallery-button--next"
+            type="button"
+            aria-label="Next image"
+            (click)="showNext()"
+          >
+            &#8594;
+          </button>
+          <div class="counter">
+            {{ activeImage + 1 }} / {{ experience.images.length }}
+          </div>
+        }
+      </div>
+
+      <div class="modal-content">
+        <p class="modal-kicker">experience details</p>
+        <h2 [id]="'experience-title-' + experience.slug">{{ experience.title }}</h2>
+    <p class="description">{{ experience.description }}</p>
+
+            @if (experience.highlights?.length) {
+            <ol class="highlights">
+                  @for (item of experience.highlights; track item.title) {
+      <li>
+        <span class="highlight-title">{{ item.title }}</span>
+        <span class="highlight-desc">{{ item.description }}</span>
+      </li>
+    }
+  </ol>
+}
+
+<div class="tags">
+          @for (tag of experience.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+}
