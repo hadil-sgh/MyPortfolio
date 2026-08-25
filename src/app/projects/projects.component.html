@@ -13,7 +13,15 @@
         [attr.aria-label]="'View ' + p.title + ' project details'"
       >
         <div class="visual">
-          <img class="project-image" [src]="p.images[0]" [alt]="p.title + ' project thumbnail'" />
+          @if (p.thumbnail) {
+            <img
+              class="project-image"
+              [src]="p.thumbnail"
+              [alt]="p.title + ' project thumbnail'"
+            />
+          } @else {
+            <div class="project-image-placeholder">Preview coming soon</div>
+          }
         </div>
         <div class="tags">
           @for (t of p.tags; track t) {
@@ -27,6 +35,9 @@
   </div>
 
   @if (selectedProject) {
-    <app-project-modal [project]="selectedProject" (closed)="closeProject()"></app-project-modal>
+    <app-project-modal
+      [project]="selectedProject"
+      (closed)="closeProject()"
+    ></app-project-modal>
   }
 </section>

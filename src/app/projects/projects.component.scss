@@ -10,7 +10,10 @@
   border-radius: 10px;
   padding: 0 26px 26px;
   animation: card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
   cursor: pointer;
 
   &:focus-visible {
@@ -19,7 +22,9 @@
   }
 
   @for $card from 1 through 6 {
-    &:nth-child(#{$card}) { animation-delay: #{($card - 1) * 80}ms; }
+    &:nth-child(#{$card}) {
+      animation-delay: #{($card - 1) * 80}ms;
+    }
   }
 
   &:hover {
@@ -47,9 +52,21 @@
     transition: transform 0.35s ease;
   }
 
+  .project-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: var(--ink-dim);
+    font: 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 }
 
-.card:hover .project-image { transform: scale(1.04); }
+.card:hover .project-image {
+  transform: scale(1.04);
+}
 
 @keyframes card-enter {
   from {
@@ -88,5 +105,7 @@ p {
 }
 
 @media (max-width: 720px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
