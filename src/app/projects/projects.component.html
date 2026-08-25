@@ -5,23 +5,19 @@
     @for (p of projects; track p.title) {
       <article
         class="card"
-        [class.is-rotated]="activeVisual === p.title"
-        (click)="rotateVisual(p.title)"
-        (keydown.enter)="rotateVisual(p.title)"
-        (keydown.space)="$event.preventDefault(); rotateVisual(p.title)"
+        (click)="openProject(p)"
+        (keydown.enter)="openProject(p)"
+        (keydown.space)="$event.preventDefault(); openProject(p)"
         tabindex="0"
         role="button"
-        [attr.aria-pressed]="activeVisual === p.title"
-        [attr.aria-label]="'Rotate ' + p.title + ' project visual'"
+        [attr.aria-label]="'View ' + p.title + ' project details'"
       >
-        <div class="visual" [class]="'visual visual--' + p.visual" aria-hidden="true">
-          <span class="visual-label">{{ p.visual }}</span>
-          <span class="visual-mark"></span>
+        <div class="visual">
+          <img class="project-image" [src]="p.images[0]" [alt]="p.title + ' project thumbnail'" />
         </div>
         <div class="tags">
           @for (t of p.tags; track t) {
             <span class="tag">{{ t }}</span>
-            @if (!$last) { <span class="dot">·</span> }
           }
         </div>
         <h3>{{ p.title }}</h3>
@@ -29,4 +25,8 @@
       </article>
     }
   </div>
+
+  @if (selectedProject) {
+    <app-project-modal [project]="selectedProject" (closed)="closeProject()"></app-project-modal>
+  }
 </section>

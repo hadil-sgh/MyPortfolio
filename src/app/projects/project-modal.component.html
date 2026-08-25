@@ -1,0 +1,33 @@
+@if (project) {
+  <div class="backdrop" (click)="close()">
+    <section
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-labelledby]="'project-title-' + project.slug"
+      (click)="$event.stopPropagation()"
+    >
+      <button class="close-button" type="button" aria-label="Close project details" (click)="close()">&times;</button>
+
+      <div class="gallery">
+        <img [src]="project.images[activeImage]" [alt]="project.title + ' screenshot ' + (activeImage + 1)" />
+        @if (project.images.length > 1) {
+          <button class="gallery-button gallery-button--previous" type="button" aria-label="Previous image" (click)="showPrevious()">&#8592;</button>
+          <button class="gallery-button gallery-button--next" type="button" aria-label="Next image" (click)="showNext()">&#8594;</button>
+          <div class="counter">{{ activeImage + 1 }} / {{ project.images.length }}</div>
+        }
+      </div>
+
+      <div class="modal-content">
+        <p class="modal-kicker">project details</p>
+        <h2 [id]="'project-title-' + project.slug">{{ project.title }}</h2>
+        <p class="description">{{ project.description }}</p>
+        <div class="tags">
+          @for (tag of project.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+}

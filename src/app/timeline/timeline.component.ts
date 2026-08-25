@@ -59,8 +59,8 @@ export class TimelineComponent {
       ],
       media: {
         type: 'image',
-        src: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85',
-        alt: 'Team collaborating around a table',
+        src: '/images/Ooredoo%20Stage/base.png',
+        alt: 'Ooredoo knowledge base interface',
       },
     },
     {

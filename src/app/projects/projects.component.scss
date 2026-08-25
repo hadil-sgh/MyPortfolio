@@ -8,7 +8,7 @@
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 26px;
+  padding: 0 26px 26px;
   animation: card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   cursor: pointer;
@@ -31,60 +31,25 @@
 
 .visual {
   position: relative;
-  height: 148px;
-  margin: -26px -26px 24px;
+  height: 190px;
+  margin: 0 -26px 24px;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  padding: 18px;
   background: #263238;
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease;
-  transform-origin: center;
 
-  &::before,
-  &::after {
-    content: '';
+  .project-image {
     position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transition: transform 0.35s ease;
   }
 
-  &::before { width: 170px; height: 170px; right: -35px; top: -75px; }
-  &::after { width: 95px; height: 95px; right: 42px; top: 30px; }
 }
 
-.is-rotated .visual {
-  transform: rotateY(180deg);
-  filter: saturate(1.35) brightness(1.12);
-}
-
-.visual-label {
-  position: relative;
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.72);
-  font: 11px var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.visual-mark {
-  position: absolute;
-  width: 74px;
-  height: 74px;
-  right: 46px;
-  top: 36px;
-  border: 12px solid rgba(255, 255, 255, 0.82);
-  border-left-color: transparent;
-  border-radius: 50%;
-  transform: rotate(-25deg);
-}
-
-.visual--knowledge { background: linear-gradient(135deg, #234e52, #39756b); }
-.visual--pipeline { background: linear-gradient(135deg, #153e67, #287b8b); }
-.visual--hr { background: linear-gradient(135deg, #69445f, #b66b63); }
-.visual--food { background: linear-gradient(135deg, #8d4b2d, #d48c43); }
-.visual--farm { background: linear-gradient(135deg, #345e45, #82a65c); }
-.visual--election { background: linear-gradient(135deg, #3c4775, #7584bb); }
+.card:hover .project-image { transform: scale(1.04); }
 
 @keyframes card-enter {
   from {
@@ -105,14 +70,15 @@
   margin-bottom: 14px;
 }
 
-.dot {
-  color: var(--line);
-  font-family: var(--font-mono);
-}
-
 h3 {
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+.tag {
+  padding: 4px 9px;
+  border: 1px solid rgba(124, 147, 201, 0.3);
+  border-radius: 999px;
 }
 
 p {

@@ -1,0 +1,95 @@
+.backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(5, 7, 9, 0.82);
+  backdrop-filter: blur(8px);
+  animation: modal-enter 0.2s ease both;
+}
+
+.modal {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: min(860px, 92vh);
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+}
+
+.close-button,
+.gallery-button {
+  border: 1px solid rgba(236, 232, 223, 0.28);
+  color: var(--ink);
+  background: rgba(11, 13, 16, 0.72);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover { background: var(--amber); border-color: var(--amber); color: var(--bg); }
+}
+
+.close-button {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.gallery {
+  position: relative;
+  min-height: 280px;
+  aspect-ratio: 16 / 8;
+  background: #0b0d10;
+
+  img { width: 100%; height: 100%; display: block; object-fit: contain; }
+}
+
+.gallery-button {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.gallery-button--previous { left: 18px; }
+.gallery-button--next { right: 18px; }
+
+.counter {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--ink-dim);
+  background: rgba(11, 13, 16, 0.78);
+  font: 11px var(--font-mono);
+}
+
+.modal-content { padding: 28px clamp(24px, 4vw, 42px) 36px; }
+.modal-kicker { margin-bottom: 8px; color: var(--amber); font: 11px var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+h2 { font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px; }
+.description { max-width: 720px; color: var(--ink-dim); line-height: 1.7; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.tag { padding: 4px 9px; border: 1px solid rgba(124, 147, 201, 0.3); border-radius: 999px; }
+
+@keyframes modal-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .backdrop { padding: 12px; }
+  .gallery { min-height: 210px; }
+}
